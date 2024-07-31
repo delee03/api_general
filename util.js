@@ -1,5 +1,9 @@
 //thực hiện render dữ liệu từ API lên giao diện
+export function chuyenHuongUser(ID) {
+    window.location.href = `http://127.0.0.1:5500/detail.html?id=${ID}`; //chuyển hướng user
+}
 
+//thực hiện render dữ liệu từ API lên giao diện
 export default function renderShoesList(arrShoes, idRender) {
     let content = "";
     for (let shoe of arrShoes) {
@@ -21,18 +25,15 @@ export default function renderShoesList(arrShoes, idRender) {
                 <!-- Price -->
                 <p>${price}</p>
                 <!-- Action -->
-                <button class="custom-button" onclick="chuyenHuongUser(${id})">Mua ngay</button>
+                <button class="custom-button" type="button" onclick="chuyenHuongUser(${id})">Mua ngay</button>
+
             </div>
         `;
     }
     document.getElementById(idRender).innerHTML = content;
 }
 
-function chuyenHuongUser(ID) {
-    window.location.href = `http://127.0.0.1:5500/detail.html?id=${ID}`; //chuyển hướng user
-}
-
-// export let duongDan = {
-//     home: "/",
-//     detail: "/detail",
-// };
+export const duongDan = {
+    home: "/",
+    detail: "/detail",
+};

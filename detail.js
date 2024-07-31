@@ -1,9 +1,25 @@
+import { chuyenHuongUser } from "./util.js";
 import renderShoesList from "./util.js";
+import { duongDan } from "./util.js";
+// Gán hàm chuyenHuongUser vào global scope
+window.chuyenHuongUser = chuyenHuongUser;
 
+// Hàm để lấy giá trị của một tham số từ URL
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, "\\$&");
+    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return "";
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+// Lấy ID của giày từ URL
+const idImport = getParameterByName("id");
 // render : B1 : lấy dữ liệu
 //B2: render ra view;
 
-function getDetailShoe(id = 5) {
+function getDetailShoe(id) {
     let promise = axios({
         url: `https://shop.cyberlearn.vn/api/Product/getbyid?id=${id}`,
         method: "GET",
@@ -21,7 +37,7 @@ function getDetailShoe(id = 5) {
         });
 }
 
-getDetailShoe();
+getDetailShoe(idImport);
 
 function renderDetailShoe(giay, idTheCha = "baiTap3") {
     console.log("Rendering shoe details:", giay);
